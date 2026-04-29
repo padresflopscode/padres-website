@@ -476,11 +476,14 @@
       We're still perfecting the build. Drop your email and we'll let you know
       the moment Padre's is ready to ship — plus early access for our founding crew.
     </p>
-    <form class="email-form reveal" onsubmit="submitEmail(event)">
-      <input type="text" id="nameInput" placeholder="Your first name" required>
-      <input type="email" id="emailInput" placeholder="Your email address" required>
-      <button type="submit" class="btn-primary">Count Me In</button>
-    </form>
+    <form class="email-form reveal" name="email-signup" method="POST" data-netlify="true">
+  <input type="hidden" name="form-name" value="email-signup">
+
+  <input type="text" name="name" placeholder="Your first name" required>
+  <input type="email" name="email" placeholder="Your email address" required>
+
+  <button type="submit" class="btn-primary">Count Me In</button>
+</form>
     <div class="success-msg" id="emailSuccess" style="margin-top:16px">
       ✅ Welcome to the Padre's family! We'll be in touch soon.
     </div>
