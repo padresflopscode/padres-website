@@ -532,15 +532,16 @@
     setTimeout(() => document.getElementById('heroSuccess').classList.remove('show'), 5000);
   }
 
-  // Email section form
-  function submitEmail(e) {
-    e.preventDefault();
-    document.getElementById('emailSuccess').classList.add('show');
-    document.getElementById('nameInput').value = '';
-    document.getElementById('emailInput').value = '';
-    setTimeout(() => document.getElementById('emailSuccess').classList.remove('show'), 5000);
-  }
-</script>
+  // HTML form
+<form name="email-signup" method="POST" data-netlify="true">
+  
+  <input type="hidden" name="form-name" value="email-signup">
 
+  <input type="text" name="name" placeholder="Your name" required>
+  <input type="email" name="email" placeholder="Your email" required>
+
+  <button type="submit">Join</button>
+</form>
+</script>
 </body>
 </html>
