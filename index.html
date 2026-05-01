@@ -534,26 +534,33 @@
     document.getElementById('emailInput').value = '';
     setTimeout(() => document.getElementById('emailSuccess').classList.remove('show'), 5000);
   }
-</script>
 <script>
-document.getElementById("email-form").addEventListener("submit", async function(e) {
+const scriptURL = "https://script.google.com/macros/s/AKfycbzPSj_OQIazEF9ASrC-egL8FJ72o5P1jPkGxADwfYGqEysA0ESnGYSiSlW-cKwLD92S/exec";
+const form = document.getElementById('email-form');
+
+form.addEventListener('submit', e => {
   e.preventDefault();
 
-  const form = e.target;
-  const name = form.name.value;
-  const email = form.email.value;
+  const formData = {
+    name: form.name.value,
+    email: form.email.value
+  };
 
-  await fetch("https://script.google.com/macros/s/AKfycbwj27uUoXg-QSm4ozNf_Ra83gKaUeeYVMy1OF_LR_ni4_-Lw_PsBj2khq7Tsr7BFszS/exec", {
-    method: "POST",
-    body: JSON.stringify({
-      name: name,
-      email: email
-    })
+  fetch(scriptURL, {
+    method: 'POST',
+    body: JSON.stringify(formData),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    alert("You're in!");
+    form.reset();
+  })
+  .catch(error => {
+    console.error('Error!', error.message);
   });
-
-  form.reset();
-
-  document.getElementById("emailSuccess").classList.add("show");
 });
 </script>
 </body>
