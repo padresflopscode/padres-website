@@ -530,6 +530,12 @@
   const form = document.getElementById("email-form");
   const successMsg = document.getElementById("emailSuccess");
 
+// Check if already submitted
+  if (localStorage.getItem("padresSubmitted")) {
+    form.style.display = "none";
+    successMsg.classList.add("show");
+  }
+
   form.addEventListener("submit", function(event) {
     event.preventDefault();
 
@@ -540,14 +546,16 @@
       mode: "no-cors",
       body: formData
     })
-    .then(function(response) {
+    .then(function() {
+      form.style.display = "none";
       successMsg.classList.add("show");
-      form.reset();
+      localStorage.setItem("padresSubmitted", "true");
     })
     .catch(function(error) {
       alert("Something went wrong. Please try again.");
       console.error(error);
     });
+  });
   });
 </script>
 </body>
