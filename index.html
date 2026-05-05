@@ -525,35 +525,29 @@
     setTimeout(() => document.getElementById('heroSuccess').classList.remove('show'), 5000);
   }
 
-  // Email section form
-  function submitEmail(e) {
-    e.preventDefault();
-    document.getElementById('emailSuccess').classList.add('show');
-    document.getElementById('nameInput').value = '';
-    document.getElementById('emailInput').value = '';
-    setTimeout(() => document.getElementById('emailSuccess').classList.remove('show'), 5000);
-  }
 </script>
-<script>
-document.getElementById("email-form").addEventListener("submit", async function(e) {
-  e.preventDefault();
+  <script>
+  const form = document.getElementById("email-form");
+  const successMsg = document.getElementById("emailSuccess");
 
-  const form = e.target;
-  const name = form.name.value;
-  const email = form.email.value;
+  form.addEventListener("submit", function(event) {
+    event.preventDefault();
 
-  await fetch("https://script.google.com/macros/s/AKfycbwj27uUoXg-QSm4ozNf_Ra83gKaUeeYVMy1OF_LR_ni4_-Lw_PsBj2khq7Tsr7BFszS/exec", {
-    method: "POST",
-    body: JSON.stringify({
-      name: name,
-      email: email
+    const formData = new FormData(form);
+
+    fetch("https://script.google.com/macros/s/AKfycbyVFEA6EX64ZEaH3VCY-Pqn-zlLy-voEUOFWfH2S3KAdSSnQPgNosUeDjdmuVppKo8C/exec", {
+      method: "POST",
+      body: formData
     })
+    .then(function(response) {
+      successMsg.classList.add("show");
+      form.reset();
+    })
+    .catch(function(error) {
+      alert("Something went wrong. Please try again.");
+      console.error(error);
+    });
   });
-
-  form.reset();
-
-  document.getElementById("emailSuccess").classList.add("show");
-});
 </script>
 </body>
 </html>
